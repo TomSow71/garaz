@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wynajem stanowiska garażowego – Toruń, ul. Żwirki i Wigury 77</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #2d3748;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #1a202c;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .location-tag {
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2b6cb0;
+            margin-bottom: 20px;
+        }
+
+        .price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #718096;
+        }
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .badge {
+            background: #edf2f7;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 19px;
+            color: #1a202c;
+            margin-bottom: 10px;
+            border-left: 4px solid #2b6cb0;
+            padding-left: 10px;
+        }
+
+        .section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 15.5px;
+        }
+
+        .info-list li::before {
+            content: "•";
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+
+        /* Galeria zdjęć */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 2px solid #e2e8f0;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border-color: #2b6cb0;
+        }
+
+        /* Kontakt */
+        .contact-box {
+            background: #ebf8ff;
+            padding: 22px;
+            border-radius: 10px;
+            border-left: 5px solid #2b6cb0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 5px;
+            color: #2c5282;
+            font-size: 18px;
+        }
+
+        .phone-btn {
+            display: inline-block;
+            background: #2b6cb0;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .phone-btn:hover {
+            background: #2c5282;
+        }
+
+        /* Pełnoekranowy podgląd (Lightbox) */
+        #fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+
+        #fullscreen-overlay img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+            animation: zoomIn 0.2s ease-out;
+        }
+
+        .close-hint {
+            position: absolute;
+            bottom: 20px;
+            color: #e2e8f0;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px 16px;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.88); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- NAGŁÓWEK I CENA -->
+    <h1>Wynajmę stanowisko garażowe w hali garażowej</h1>
+    <div class="location-tag">Lokalizacja: Hala garażowa pod budynkiem mieszkalnym wielorodzinnym, Toruń ul. Żwirki i Wigury 77</div>
+    <div class="price">550 zł / miesiąc <span>(opłaty administracyjne i podatek w cenie)</span></div>
+
+    <!-- NAJWAŻNIEJSZE PARAMETRY -->
+    <div class="details">
+        <span class="badge">Wymiary: 2,75 × 5,95 m</span>
+        <span class="badge">Własna brama uchylna</span>
+        <span class="badge">Hala monitorowana</span>
+        <span class="badge">Przeznaczenie: Samochód osobowy</span>
+        <span class="badge">Dostępność: Od zaraz</span>
+    </div>
+
+    <!-- OPIS -->
+    <div class="section">
+        <p>Wynajmę indywidualne stanowisko garażowe o wymiarach <strong>2,75 × 5,95 m</strong> zamykane własną bramą, znajdujące się w hali garażowej pod budynkiem mieszkalnym przy ul. Żwirki i Wigury 77 w Toruniu z przeznaczeniem do parkowania samochodu osobowego.</p>
+    </div>
+
+    <!-- SZCZEGÓŁY OFERTY -->
+    <div class="section">
+        <h2>Szczegóły oferty</h2>
+        <ul class="info-list">
+            <li><strong>Bezpieczeństwo:</strong> Stanowisko garażowe posiada własną, zamykaną na klucz bramę uchylną, co całkowicie odgradza pojazd od reszty hali. Dodatkowo hala jest monitorowana i posiada automatyczną bramę wjazdową na pilota.</li>
+            <li><strong>Stan:</strong> Czysto, sucho i bezpiecznie przez cały rok. Dobra wentylacja.</li>
+            <li><strong>Przeznaczenie:</strong> Samochód osobowy.</li>
+            <li><strong>Dostępność:</strong> Od zaraz.</li>
+        </ul>
+    </div>
+
+    <!-- KOSZTY -->
+    <div class="section">
+        <h2>Koszty najmu</h2>
+        <ul class="info-list">
+            <li><strong>Cena najmu:</strong> 550 zł / miesiąc</li>
+            <li><strong>Opłata administracyjna:</strong> 60 zł / miesiąc – w "cenie najmu":</li>
+            <li><strong>Podatek od nieruchomości:</strong> 46,75 zł / miesiąc – w "cenie najmu"</li>
+            <li><strong>Kaucja:</strong> jednokrotność czynszu (550 zł)</li>
+        </ul>
+    </div>
+
+    <!-- GALERIA 5 ZDJĘĆ -->
+    <div class="section">
+        <h2>Zdjęcia stanowiska (najedź lub dotknij, aby powiększyć)</h2>
+        <div class="gallery">
+            <!-- Wpisz dokładne nazwy swoich 5 plików ze zdjęciami poniżej -->
+            <img src="zdjecie1.jpg" alt="Lokalizacja">
+            <img src="zdjecie2.jpg" alt="Budynek z halą garażową">
+            <img src="zdjecie3.jpg" alt="Widok ogólny hali garażowej">
+            <img src="zdjecie4.jpg" alt="Brama uchylna">
+            <img src="zdjecie5.jpg" alt="Stanowisko garażowe">
+        </div>
+    </div>
+
+    <!-- DANE KONTAKTOWE -->
+    <div class="contact-box">
+        <div>
+            <h3>Kontakt w sprawie wynajmu</h3>
+            <p>Osoby zainteresowane proszę o kontakt telefoniczny:</p>
+        </div>
+        <a href="tel:+48601585258" class="phone-btn">Tel: 601 585 258</a>
+    </div>
+</div>
+
+<!-- WARSTWA POWIĘKSZENIA NA CAŁĄ STRONĘ -->
+<div id="fullscreen-overlay">
+    <img id="fullscreen-img" src="" alt="Powiększone zdjęcie">
+    <div class="close-hint">Zjedź kursorem lub dotknij ekranu, aby zamknąć</div>
+</div>
+
+<script>
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const overlay = document.getElementById('fullscreen-overlay');
+    const fullImg = document.getElementById('fullscreen-img');
+
+    galleryImages.forEach(img => {
+        // Otwórz po najechaniu kursorem
+        img.addEventListener('mouseenter', () => {
+            openFullscreen(img.src);
+        });
+
+        // Otwórz po kliknięciu lub dotknięciu palcem
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openFullscreen(img.src);
+        });
+    });
+
+    function openFullscreen(src) {
+        if (!src) return;
+        fullImg.src = src;
+        overlay.style.display = 'flex';
+    }
+
+    function closeFullscreen() {
+        overlay.style.display = 'none';
+        fullImg.src = '';
+    }
+
+    // Zamknij po kliknięciu lub dotknięciu w dowolnym miejscu podglądu
+    overlay.addEventListener('click', closeFullscreen);
+
+    // Zamknij po zjechaniu kursorem poza powiększone zdjęcie
+    fullImg.addEventListener('mouseleave', closeFullscreen);
+
+    // Zamknij klawiszem ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeFullscreen();
+        }
+    });
+</script>
